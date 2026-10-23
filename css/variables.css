@@ -1,0 +1,40 @@
+/* ── DESIGN TOKENS ───────────────────────────────────────────────────────── */
+:root {
+  --bg: #fdf4e5;
+  --surface: #fffdf9;
+  --border: #e6dbca;
+  --text-1: #232537;
+  --text-2: #57596d;
+  --accent: #5c6ae5;
+  --accent-hover: #4c56d3;
+  --accent-bg: #e5edff;
+  --success: #139948;
+  --danger: #de4544;
+  --danger-bg: #ffe7e3;
+
+  --radius-sm: 10px;
+  --radius: 15px;
+  --shadow: 0 6px 24px rgba(89, 92, 155, 0.10);
+
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+
+  --font: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --tap-size: 44px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #17181f;
+    --surface: #20222c;
+    --border: #353848;
+    --text-1: #f0f1f7;
+    --text-2: #a9acbd;
+    --accent: #8b95ff;
+    --accent-hover: #a3abff;
+    --accent-bg: #2a2e4f;
+    --danger: #ff7a78;
+    --danger-bg: #3d2020;
+  }
+}

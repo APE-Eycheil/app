@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#5c6ae5">
+  <title>APE Eycheil</title>
+  <link rel="manifest" href="manifest.webmanifest?v=2">
+  <link rel="icon" href="icons/icon.svg">
+  <link rel="stylesheet" href="css/reset.css?v=2">
+  <link rel="stylesheet" href="css/variables.css?v=2">
+  <link rel="stylesheet" href="css/base.css?v=2">
+  <link rel="stylesheet" href="css/layout.css?v=2">
+</head>
+<body>
+
+  <!-- ── Barre du haut ── -->
+  <header id="topbar" class="topbar" hidden>
+    <nav class="topbar__nav" aria-label="Navigation principale">
+      <button id="nav-home" class="nav-btn" type="button">Accueil</button>
+    </nav>
+    <button id="btn-logout" class="nav-btn" type="button">Se déconnecter</button>
+  </header>
+
+  <!-- ── Vues ── -->
+  <main id="views">
+    <!-- Vue : connexion -->
+    <section id="view-login" class="view">
+      <h1>APE Eycheil</h1>
+      <form id="login-form">
+        <label for="login-firstname">Prénom</label>
+        <input id="login-firstname" class="form-input" type="text" name="firstname" autocomplete="username" required>
+        <label for="login-password">Mot de passe</label>
+        <input id="login-password" class="form-input" type="password" name="password" autocomplete="current-password" minlength="8" required>
+        <p id="login-error" class="form-error" role="alert" hidden></p>
+        <button class="btn btn--primary" type="submit">Se connecter</button>
+      </form>
+    </section>
+
+    <!-- Vue : accueil (Mes tâches, à venir en phase 1) -->
+    <section id="view-home" class="view" hidden>
+      <h1>Accueil</h1>
+      <p>Phase 0 : squelette en place.</p>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+  <script src="js/config.js?v=2"></script>
+  <script src="js/utils.js?v=2"></script>
+  <script src="js/ui.js?v=2"></script>
+  <script src="js/data.js?v=2"></script>
+  <script src="js/auth.js?v=2"></script>
+  <script src="js/nav.js?v=2"></script>
+  <script src="js/app.js?v=2"></script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+{
+  "name": "APE Eycheil",
+  "short_name": "APE Eycheil",
+  "lang": "fr",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#fdf4e5",
+  "theme_color": "#5c6ae5",
+  "icons": [
+    { "src": "icons/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}
