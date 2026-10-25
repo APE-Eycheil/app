@@ -1,35 +1,18 @@
 # Phase 0 — mise en place — pending
 
 Goal: une page vide installable avec connexion fonctionnelle, sur le vrai hébergement (cahier §10, phase 0).
-Docs written: `CLAUDE.md`, `AI/Architecture.md`, `js/CLAUDE.md`, `css/CLAUDE.md`, `supabase/CLAUDE.md`.
-
-## Décisions avant de continuer (Félicien)
-- [ ] Second propriétaire de l'organisation GitHub `APE-Eycheil` : **aucun pour l'instant** (Félicien seul). Risque : dépendance à une personne (cahier §13). À reprendre dès qu'un membre du bureau accepte ; d'ici là, export régulier du dépôt.
-- [ ] Compte Supabase rattaché à l'asso, second administrateur.
-
-## Hébergement
-- [ ] Activer GitHub Pages sur `APE-Eycheil/app` (branche `main`, racine) ; vérifier l'adresse réelle `https://ape-eycheil.github.io/app/`.
-- [ ] Vérifier que le dépôt public est bien requis pour Pages gratuit.
-- [ ] Générer le QR code une fois l'adresse confirmée.
+Docs written: `CLAUDE.md`, `AI/Architecture.md`, `js/CLAUDE.md`, `css/CLAUDE.md`, `supabase/CLAUDE.md`, `tests/CLAUDE.md`.
 
 ## Supabase
-- [ ] Créer le projet avec : Data API activée, exposition automatique des tables **désactivée**, RLS automatique **activée**. Vérifier limites de l'offre gratuite (stockage, bande passante, mise en pause).
-- [ ] Authentification : confirmation par mail désactivée ; vérifier que l'identifiant `prenom@ape.invalid` est accepté ; limitation des tentatives activée.
-- [ ] Appliquer `supabase/migrations/0001_profiles.sql` sur un projet de test, relire les RLS.
-- [ ] Table `app_settings` + fonction d'inscription avec code d'invitation haché (`0002_…`).
+- [ ] À vérifier à la main dans le tableau de bord, sur les **deux** projets : limitation des tentatives de connexion activée ; mot de passe 8 caractères minimum ; limites de l'offre gratuite (stockage, bande passante, mise en pause).
 - [ ] Bucket `justificatifs` privé (phase 2, mais à créer privé dès le départ).
-- [ ] Créer le premier compte administrateur (Félicien) à la main, `is_treasurer = true`.
+- [ ] Créer le premier compte administrateur : Félicien s'inscrit dans l'appli en ligne avec le code, puis promotion par SQL sur le projet réel (`role = 'admin'`, `status = 'valide'`, `is_treasurer = true`).
 
-## Compte de test
-- [ ] Projet Supabase de test (ou comptes de test sur le projet) : un compte fictif « Test » par rôle utile ; identifiants transmis par Félicien pendant la session, jamais dans le dépôt.
+## Test dans un vrai Chromium (après déploiement)
+- [ ] Pousser sur `main` (sur demande de Félicien) pour que `https://ape-eycheil.github.io/app/` serve la nouvelle version.
 - [ ] Décider : Chromium de l'interface web de Claude, ou accès au Chromium de Félicien.
-
-## Code
-- [ ] `index.html` : ajouter le `<script>` du client Supabase en version figée (CDN, avant `js/data.js`).
-- [ ] `js/config.js` : renseigner URL et clé `anon` (publiques).
-- [ ] Icônes PNG 192 / 512 (iPhone n'utilise pas le SVG) dans `icons/` + `manifest.webmanifest`.
-- [ ] Lire la session au chargement (`db.auth.getSession()`), charger `currentProfile`, router vers `home` ou `login`.
+- [ ] Parcours sur l'appli en ligne : service worker, chemins sous `/app/`, rendu 360 px, console.
 
 ## Vérifier
-- [ ] Ouverture sur Android et iPhone, ajout à l'écran d'accueil, connexion d'un compte validé, refus d'un compte en attente.
-- [ ] `supabase/tests/` : un compte en attente ne lit rien.
+- [ ] Ouverture sur Android et iPhone, ajout à l'écran d'accueil (icônes PNG), connexion d'un compte validé, refus d'un compte en attente.
+- [ ] `supabase/tests/` : un compte en attente ne lit rien (vérifié à la main sur le test le 2026-10-25, pas encore écrit en SQL).

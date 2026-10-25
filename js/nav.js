@@ -8,7 +8,7 @@ function showView(name) {
   document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('active'));
 
   document.getElementById('view-' + name).hidden = false;
-  document.getElementById('topbar').hidden = name === 'login';
+  document.getElementById('topbar').hidden = name === 'login' || name === 'signup';
 
   const navId = NAV_BUTTONS[name];
   if (navId) document.getElementById(navId).classList.add('active');

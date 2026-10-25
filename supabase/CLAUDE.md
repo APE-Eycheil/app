@@ -5,12 +5,14 @@ Base, droits (RLS) et réglages. **Écrire les RLS avant les écrans** qui lisen
 | Élément | Rôle |
 |---|---|
 | `migrations/NNNN_nom.sql` | SQL numéroté, appliqué dans l'ordre ; RLS activée dès la création de chaque table |
+| `0001_profiles` | `profiles`, `is_validated()`, `is_admin()` |
+| `0002_inscription` | `app_settings` (hash du code), triggers `auth.users` : contrôle du code, effacement du code des métadonnées, création du profil |
 | `tests/` | Tests de droits par rôle (à créer en phase 1) |
 
 ## Réglages du projet (sécurité)
 - Data API : **activée**. « Automatically expose new tables » : **désactivé**. « Enable automatic RLS » : **activé**.
 - Conséquence : toute migration qui crée une table écrit ses `GRANT` explicites, au rôle `authenticated` uniquement et seulement les opérations utiles (jamais `anon`, jamais `all`), puis ses politiques RLS. Table sans politique = inaccessible.
-- Confirmation par mail désactivée (identifiants `prenom@ape.invalid`) ; limitation des tentatives de connexion activée ; mots de passe 8 caractères minimum.
+- Confirmation par mail désactivée (identifiant = e-mail saisi, aucun mail envoyé) ; limitation des tentatives de connexion activée ; mots de passe 8 caractères minimum.
 - Bucket `justificatifs` privé.
 
 ## Deux projets : réel et test

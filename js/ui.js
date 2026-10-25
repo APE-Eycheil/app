@@ -2,6 +2,14 @@
 // UI HELPERS — helpers DOM partagés entre les vues
 // ═══════════════════════════════════════════════════════════════════════════════
 
+// ── Messages de formulaire ────────────────────────────────────────────────────
+// Texte vide = message masqué.
+function showMessage(elementId, text) {
+  const el = document.getElementById(elementId);
+  el.textContent = text;
+  el.hidden = !text;
+}
+
 // ── Réordonnancement (même API que ChooseYourScore) ──────────────────────────
 function makeReorderBtns(upHandler, downHandler) {
   const wrap = document.createElement('div');

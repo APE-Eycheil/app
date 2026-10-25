@@ -42,6 +42,17 @@ label {
   color: var(--danger);
 }
 
+.form-info {
+  margin-top: var(--space-sm);
+  color: var(--success);
+}
+
+.form-note {
+  margin-top: var(--space-md);
+  color: var(--text-2);
+  font-size: 0.875rem;
+}
+
 .btn {
   min-height: var(--tap-size);
   padding: 0 var(--space-lg);
@@ -64,4 +75,12 @@ label {
 
 .btn--primary:hover {
   background: var(--accent-hover);
+}
+
+.btn--link {
+  width: 100%;
+  margin-top: var(--space-sm);
+  border-color: transparent;
+  background: transparent;
+  color: var(--accent);
 }

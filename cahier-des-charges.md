@@ -33,10 +33,10 @@ Public : le bureau et les parents d'élèves impliqués dans l'APE. Accès rése
 Règle : un membre voit ses propres dépenses et leur statut ; le bureau et les administrateurs voient toutes les dépenses.
 
 ## 4. Comptes et authentification
-**Décidé :** identifiant = prénom, mot de passe personnel, **aucun numéro de téléphone ni mail collecté**, validation manuelle par un administrateur, appareil resté connecté après la première connexion.
+**Décidé (2026-10-25) :** identifiant = **adresse e-mail** (évite les doublons de prénom), mot de passe personnel, **aucun numéro de téléphone collecté**, validation manuelle par un administrateur, appareil resté connecté après la première connexion.
 
 ### 4.1 Demande d'accès (au choix)
-- **Voie A — formulaire dans l'appli :** prénom (avec initiale du nom si doublon), mot de passe souhaité, code d'invitation. Le compte est créé au statut **en attente**.
+- **Voie A — formulaire dans l'appli :** prénom (affiché), e-mail (identifiant de connexion), mot de passe souhaité, code d'invitation. Le compte est créé au statut **en attente**.
 - **Voie B — message à Félicien :** l'administrateur crée le compte lui-même depuis l'écran d'administration (statut directement « validé »).
 - Dans les deux cas c'est un administrateur qui valide. Aucune donnée n'est accessible avant validation.
 
@@ -50,8 +50,8 @@ Règle : un membre voit ses propres dépenses et leur statut ; le bureau et les 
 - Pas de récupération automatique : **l'administrateur réinitialise à la main** (écran dédié, mot de passe provisoire à changer à la connexion).
 - **Protection anti-robot (décidé) : pas de captcha séparé**, elle repose sur le système d'identification : code d'invitation obligatoire, **validation manuelle** de chaque compte (un faux compte n'accède à rien), limitation des tentatives de connexion et d'inscription fournie par le service.
 
-### 4.4 Réalisation technique (proposition)
-Le service d'authentification type Supabase exige un identifiant de forme « mail ». Solution : générer en interne un **identifiant technique** (par exemple `prenom-initiale@ape.invalid`) jamais affiché, que l'utilisateur ne voit pas. L'utilisateur saisit son prénom ; l'appli convertit en identifiant technique. Pas de confirmation par mail. Le statut « validé » est tenu dans une table de profils et **contrôlé par les règles de sécurité de la base**, pas par la page. **[À VÉRIFIER]** que l'offre gratuite autorise ce fonctionnement sans mail.
+### 4.4 Réalisation technique (décidé)
+L'utilisateur se connecte avec son **e-mail** et son mot de passe ; le prénom est saisi à l'inscription et stocké dans le profil. **Aucun mail envoyé** (confirmation désactivée, réinitialisation à la main : une faute de frappe dans l'adresse est donc sans gravité). L'inscription passe par un contrôle du code d'invitation côté base (`0002_inscription`). Le statut « validé » est tenu dans une table de profils et **contrôlé par les règles de sécurité de la base**, pas par la page. Vérifié sur le projet de test (2026-10-25).
 
 ## 5. Exigences fonctionnelles
 Priorités : **P1** = indispensable au premier test, **P2** = important, **P3** = confort. Les phases sont décrites au §10.
@@ -183,7 +183,7 @@ Toutes les tables ont `id`, `created_at`, `updated_at`, `created_by`.
 - **Aucune donnée sensible dans l'appli** : pas de mot de passe d'autres services, pas de donnée bancaire, pas de téléphone, pas de santé. L'appli est un outil d'organisation, pas un coffre.
 
 ### 7.2 Vie privée (RGPD)
-- Données collectées : prénom, rôle, contenu saisi, photos de factures. **Pas de téléphone, pas de mail, pas de données de santé, pas de nom d'enfant.**
+- Données collectées : prénom, adresse e-mail (identifiant de connexion, visible des administrateurs seulement, jamais utilisée pour écrire), rôle, contenu saisi, photos de factures. **Pas de téléphone, pas de données de santé, pas de nom d'enfant.**
 - Les justificatifs peuvent contenir des données de tiers : consigne de cadrer la facture ; la photo n'est visible que du saisissant et du trésorier (le bureau voit la dépense, pas la photo **[À VALIDER]**) ; elle est **supprimée de l'appli dès que le trésorier l'a récupérée** (décidé). La conservation légale des justificatifs relève du trésorier, hors de l'appli (durée **[À VÉRIFIER]** avec les obligations de l'association).
 - Information aux membres à l'inscription (courte mention : finalité, qui voit quoi, comment être supprimé) ; suppression/anonymisation d'un compte à la demande.
 - Les identifiants GitHub/Supabase ne sont écrits nulle part dans ce dossier.
@@ -204,13 +204,13 @@ Toutes les tables ont `id`, `created_at`, `updated_at`, `created_by`.
 - Coût : **0 €** au départ (pas de nom de domaine, pas de SMS) ; tout coût éventuel (dépassement de l'offre gratuite) décidé par le bureau.
 
 ## 9. Mise en place (hors code)
-1. ~~Créer l'organisation GitHub~~ **Fait** : `APE-Eycheil`, dépôt `app`. Reste : ajouter un **second propriétaire** du bureau **[À VALIDER]** et ne jamais renommer.
-2. Créer le projet de base de données (compte rattaché à l'asso, pas à une personne ; second administrateur).
-3. Activer GitHub Pages sur le dépôt ; vérifier l'adresse réelle (`https://ape-eycheil.github.io/app/`).
-4. Générer le **QR code** une fois l'adresse vérifiée (elle ne change plus).
+1. ~~Créer l'organisation GitHub~~ **Fait** : `APE-Eycheil`, dépôt `app`. Ne jamais renommer.
+2. Créer le projet de base de données (tous les comptes au nom de Félicien, seul propriétaire/administrateur).
+3. ~~Activer GitHub Pages~~ **Fait** : `https://ape-eycheil.github.io/app/` fonctionnelle.
+4. ~~Générer le QR code~~ **Fait** (2026-10-25), l'adresse ne change plus.
 5. Préparer la **notice d'installation** Android et iPhone (captures) et un texte de présentation à l'école.
 6. Définir le **code d'invitation** initial.
-7. Informations d'accès : conservées par Félicien et le second administrateur, **hors du dossier du projet**.
+7. Informations d'accès : conservées par Félicien, **hors du dossier du projet**.
 
 ## 10. Phases et planning (proposition)
 Calendrier à ajuster ; objectif : appli stable avant le loto (mars 2027). Un premier usage réel avant (chocolats de Noël, réunion maîtresses du 2026-11-05) n'est pas obligatoire.
@@ -241,7 +241,7 @@ Repères : fin 2026 = phase 1 testée par le bureau ; janvier-février 2027 = ph
 ## 13. Risques
 | Risque | Parade |
 |---|---|
-| Dépendance à une personne (Félicien) | Organisation GitHub, second administrateur, export régulier, doc de passation |
+| Dépendance à une personne (Félicien) | Export régulier, doc de passation |
 | Faille de sécurité (dépôt public) | Règles de base testées, pas de secret dans le code, revue avant chaque ouverture |
 | Faible adoption par les parents | Tout en un clic, QR code, première utilisation à la réunion, WhatsApp comme relais |
 | Limites de l'offre gratuite dépassées (photos) | Photos compressées et supprimées après récupération par le trésorier, donc stockage quasi vide |
@@ -260,12 +260,12 @@ Repères : fin 2026 = phase 1 testée par le bureau ; janvier-février 2027 = ph
 - Le trésorier seul vérifie et pointe les dépenses.
 - Justificatifs : transmis au trésorier, supprimés de l'appli une fois récupérés.
 - Date du loto 2027 : pas encore connue.
+- Tous les comptes (GitHub, base de données) sont au nom de Félicien, seul propriétaire/administrateur.
 
 **Reste à trancher**
-1. Second propriétaire de l'organisation GitHub (un autre membre du bureau).
-2. Le bureau voit-il les photos de justificatifs, ou seulement la dépense ? (proposition : photos visibles du saisissant et du trésorier seulement)
-3. Date du loto 2027 (pour caler le calendrier).
-4. Vérifications techniques : GitHub Pages sur le dépôt, limites de l'offre gratuite de la base, connexion sans mail.
+1. Le bureau voit-il les photos de justificatifs, ou seulement la dépense ? (proposition : photos visibles du saisissant et du trésorier seulement)
+2. Date du loto 2027 (pour caler le calendrier).
+3. Vérifications techniques : limites de l'offre gratuite de la base, (GitHub Pages et connexion sans mail : vérifiés).
 
 ## 15. Consignes pour le développement
 - Respecter strictement les règles du `CLAUDE.md` : français, aucune donnée sensible recopiée, pas de « pointé » sans justificatif.

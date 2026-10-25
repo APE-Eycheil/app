@@ -6,7 +6,7 @@ Chargé dans l'ordre par `index.html` (avec `?v=N`). Mobile d'abord.
 |---|---|
 | `reset.css` | Reset global, `[hidden]` toujours respecté |
 | `variables.css` | Tokens (couleurs, espacements, rayons, taille tactile) + thème sombre automatique |
-| `base.css` | Typographie, focus, composants réutilisables (`.btn`, `.form-input`, `.form-error`) |
+| `base.css` | Typographie, focus, composants réutilisables (`.btn`, `.btn--primary`, `.btn--link`, `.form-input`, `.form-error`, `.form-info`, `.form-note`) |
 | `layout.css` | Barre du haut, boutons de navigation, `.view` |
 
 ## Règles

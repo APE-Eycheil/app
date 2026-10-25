@@ -3,9 +3,9 @@
 // Les données (Supabase) ne sont jamais mises en cache : hors ligne reporté en phase 4.
 // Incrémenter CACHE_VERSION en même temps que les ?v= de index.html.
 // ═══════════════════════════════════════════════════════════════════════════════
-const CACHE_VERSION = 2;
+const CACHE_VERSION = 4;
 const CACHE_NAME = 'ape-shell-v' + CACHE_VERSION;
-const SHELL = ['./', 'index.html', 'manifest.webmanifest', 'icons/icon.svg'];
+const SHELL = ['./', 'index.html', 'manifest.webmanifest', 'icons/icon.svg', 'icons/icon-192.png', 'icons/icon-512.png'];
 
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(SHELL)));

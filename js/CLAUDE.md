@@ -4,11 +4,11 @@ Scripts classiques chargés par `index.html` dans cet ordre (avec `?v=N`). Fonct
 
 | Fichier | Rôle |
 |---|---|
-| `config.js` | URL + clé publique Supabase, domaine des identifiants techniques |
-| `utils.js` | Fonctions pures : `escapeHtml`, `firstnameToEmail` |
-| `ui.js` | Helpers DOM partagés : `makeReorderBtns`, `syncReorderBtns`, `setReorderDisabled` |
-| `data.js` | **Seul accès à Supabase** : `initData()`, puis `loadX()/saveX()` asynchrones par table |
-| `auth.js` | Connexion / déconnexion, `currentProfile` |
+| `config.js` | URL + clé publique Supabase |
+| `utils.js` | Fonctions pures : `escapeHtml` |
+| `ui.js` | Helpers DOM partagés : `showMessage`, `makeReorderBtns`, `syncReorderBtns`, `setReorderDisabled` |
+| `data.js` | **Seul accès à Supabase** : `initData()`, auth (`signIn`, `signUp`, `signOut`, `loadOwnProfile`), puis `loadX()/saveX()` asynchrones par table |
+| `auth.js` | Connexion par e-mail, inscription (prénom, e-mail, mot de passe, code), déconnexion, `currentProfile` |
 | `nav.js` | `showView(name)`, `NAV_BUTTONS` |
 | `app.js` | Point d'entrée : branche les formulaires, service worker, première vue |
 

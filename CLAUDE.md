@@ -58,6 +58,7 @@ Règles de la porte :
 | JS (accès données, vues, helpers) | `js/CLAUDE.md` |
 | CSS (tokens, composants, vues) | `css/CLAUDE.md` |
 | Base, RLS, migrations, réglages Supabase | `supabase/CLAUDE.md` |
+| Parcours de test Playwright | `tests/CLAUDE.md` |
 | Docs thématiques de l'agent | `AI/CLAUDE.md` |
 | Travail restant d'une fonctionnalité | `AI/Pending/` |
 
@@ -71,4 +72,4 @@ Dans `index.html`, chaque `<link rel="stylesheet">` et `<script src>` porte `?v=
 Avant de commencer : `git fetch origin main`, aligner la branche de travail sur `origin/main`. Branche `claude/<sujet>` → commit → PR → merge, seulement quand Félicien le demande. Une phase du cahier (§10) = une version utilisable.
 
 ## État
-Phase 0 : squelette posé, aucun projet Supabase créé. Points ouverts (cahier §14) : second propriétaire GitHub, photos visibles du bureau ou non, date du loto 2027, vérifs techniques (Pages, limites gratuites, connexion sans mail). Prochaine étape : `AI/Pending/Phase0-MiseEnPlace.md`.
+Phase 0 : squelette posé, Pages en ligne + QR code faits, projets Supabase (réel + test) créés, migrations 0001-0002 appliquées, connexion par e-mail décidée. Tous les comptes au nom de Félicien (seul propriétaire). Points ouverts (cahier §14) : photos visibles du bureau ou non, date du loto 2027, limites de l'offre gratuite. Prochaine étape : `AI/Pending/Phase0-MiseEnPlace.md`.
